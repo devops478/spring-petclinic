@@ -127,18 +127,14 @@ pipeline {
 		     steps {
 		       script {
 		        withCredentials([usernameColonPassword(credentialsId: 'tomcat_credentials', variable: 'mycred')]) {
-                sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-167-86.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}&update=true"
-	           	    }
+                sh '''
+                  curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-167-86.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}&update=true
+                  service tomcat restart
+                '''
+
+	           	  }
 		        }
 	         }
-          }
-          stage('retart tomcat service') {
-              agent {
-                  label "master"
-              }
-              steps {
-                  sh 'service tomcat restart'
-              }
           }
        }  
     /*post {
