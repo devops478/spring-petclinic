@@ -122,7 +122,7 @@ pipeline {
 	         }
           }
        }  
-    post {
+    /*post {
        success {
          mail to: 'ksandy.katta@gmail.com',
          subject: "SUCCESS: Status of pipeline: ${currentBuild.fullDisplayName}",
@@ -133,5 +133,5 @@ pipeline {
           subject: "FAILURE: Status of pipeline: ${currentBuild.fullDisplayName}",
           body: "${env.BUILD_URL} has result ${currentBuild.result}"
        }
-    }
+    }*/
 }
