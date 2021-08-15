@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
 			  script {
-                sh 'mvn clean install deploy'
+                sh 'mvn clean install'
             }
 		  }
         }
