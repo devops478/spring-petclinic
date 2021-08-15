@@ -7,7 +7,7 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_URL = "ec2-44-197-103-33.compute-1.amazonaws.com:8081"
+        NEXUS_URL = "ec2-34-234-83-60.compute-1.amazonaws.com:8081"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "spring-petclinic"
         // Jenkins credential id to authenticate to Nexus OSS
