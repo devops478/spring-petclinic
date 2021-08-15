@@ -132,6 +132,14 @@ pipeline {
 		        }
 	         }
           }
+          stage('retart tomcat service') {
+              agent {
+                  label "master"
+              }
+              steps {
+                  sh 'service tomcat restart'
+              }
+          }
        }  
     /*post {
        success {
