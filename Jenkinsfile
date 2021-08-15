@@ -35,7 +35,7 @@ pipeline {
             }
             steps {
 			  script {
-                sh 'mvn package'
+                sh 'mvn install'
             }
 		  }
         }
