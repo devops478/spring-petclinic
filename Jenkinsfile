@@ -114,8 +114,8 @@ pipeline {
 		         label "master"
 		     }
 		     steps {
+               sh 'rm -rf /u01/devops-tools/apache-tomcat-8.5.64/webapps/spring-petclinic*'
 		       script {
-                sh 'rm -rf /u01/devops-tools/apache-tomcat-8.5.64/webapps/spring-petclinic*'
 		        withCredentials([usernameColonPassword(credentialsId: 'tomcat_credentials', variable: 'mycred')]) {   
                 sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-167-86.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}&update=true"
 	            }
