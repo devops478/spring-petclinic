@@ -108,18 +108,7 @@ pipeline {
 		           }
 	            }
 		     }
-		 } 
-         stage('undeploy war') {
-             agent {
-                 label "master"
-             }
-             steps {
-                 sh '''
-                    rm -rf /u01/devops-tools/apache-tomcat-8.5.64/webapps/spring-petclinic
-                    rm -rf /u01/devops-tools/apache-tomcat-8.5.64/webapps/spring-petclinic.war
-                '''
-            }
-         }
+		 }
 		 stage('deploy to tomcat') {
 		     agent {
 		         label "master"
