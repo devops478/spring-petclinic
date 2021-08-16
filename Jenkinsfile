@@ -7,7 +7,7 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_URL = "ec2-34-234-83-60.compute-1.amazonaws.com:8081"
+        NEXUS_URL = "ec2-34-201-102-23.compute-1.amazonaws.com:8081"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "spring-petclinic"
         // Jenkins credential id to authenticate to Nexus OSS
@@ -116,8 +116,9 @@ pipeline {
 		     steps {
 		       script {
 		        withCredentials([usernameColonPassword(credentialsId: 'tomcat_credentials', variable: 'mycred')]) {
-                sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-167-86.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}&update=true"
-                sh 'service tomcat restart'
+                sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/undeploy?path=/${pom.artifactId}"
+                sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}&update=true"
+                sh "curl -v -u ${mycred} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}"
 	           	  }
 		        }
 	         }
