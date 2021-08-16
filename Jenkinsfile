@@ -116,9 +116,8 @@ pipeline {
 		     steps {
 		       script {
 		        withCredentials([usernameColonPassword(credentialsId: 'tomcat_credentials', variable: 'mycred')]) {
-                sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/undeploy?path=/${pom.artifactId}"
                 sh "curl -v -u ${mycred} -T ${pom.artifactId}.${pom.packaging} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}&update=true"
-                sh "curl -v -u ${mycred} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/deploy?path=/${pom.artifactId}"
+                sh "curl -v -u ${mycred} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/start?path=/${pom.artifactId}"
 	           	  }
 		        }
 	         }
