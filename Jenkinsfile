@@ -124,11 +124,11 @@ pipeline {
                }
              }
          }
-         stage('deploy to tomcat') {
+         /*stage('deploy to tomcat') {
 		     agent {
 		         label "master"
 		     }
-		     /*steps {
+		     steps {
 		       script {
 		        withCredentials([usernameColonPassword(credentialsId: 'tomcat_credentials', variable: 'mycred')]) {
                 sh "curl -v -u ${mycred} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/undeploy?path=/${pom.artifactId}"
