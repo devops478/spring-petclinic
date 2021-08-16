@@ -117,7 +117,7 @@ pipeline {
              steps{
                sshagent(['devops-tomcat-deploy-sshkey']) {
                sh '''
-                scp -o StrictHostKeyChecking=no spring-petclinic.war devops@ec2-100-26-50-45.compute-1.amazonaws.com:/tmp
+                scp -o StrictHostKeyChecking=no spring-petclinic.war devops@ec2-100-26-50-45.compute-1.amazonaws.com:/u01/devops-tools/apache-tomcat-8.5.64/webapps
                 ssh devops@ec2-100-26-50-45.compute-1.amazonaws.com /u01/devops-tools/apache-tomcat-8.5.64/bin/shutdown.sh
                 ssh devops@ec2-100-26-50-45.compute-1.amazonaws.com /u01/devops-tools/apache-tomcat-8.5.64/bin/startup.sh
                '''
