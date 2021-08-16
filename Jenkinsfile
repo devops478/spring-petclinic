@@ -12,6 +12,8 @@ pipeline {
         NEXUS_REPOSITORY = "spring-petclinic"
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
+        // Tomcat deployment using SSH Agent.
+        ARTIFACT_ID_PKG = "spring-petclinic.war"
     }
 	
     stages {
@@ -117,7 +119,7 @@ pipeline {
              steps{
                sshagent(['devops-tomcat-deploy-sshkey']) {
                sh '''
-                scp -o StrictHostKeyChecking=no ${pom.artifactId}.${pom.packaging} devops@ec2-100-26-50-45.compute-1.amazonaws.com:/u01/devops-tools/apache-tomcat-8.5.64/webapps
+                scp -o StrictHostKeyChecking=no ${ARTIFACT_ID_PKG} devops@ec2-100-26-50-45.compute-1.amazonaws.com:/u01/devops-tools/apache-tomcat-8.5.64/webapps
                 ssh devops@ec2-100-26-50-45.compute-1.amazonaws.com /u01/devops-tools/apache-tomcat-8.5.64/bin/shutdown.sh
                 ssh devops@ec2-100-26-50-45.compute-1.amazonaws.com /u01/devops-tools/apache-tomcat-8.5.64/bin/startup.sh
                '''
