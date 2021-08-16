@@ -109,15 +109,15 @@ pipeline {
 	            }
 		     }
 		 }
-		 
-         stage("deploy-dev"){
+		 // Need to install 'SSH Agent Plugin' and create add 'SSH Username with private key' credentials(Generate ssh-keygen on target server and add private key in jenkins).
+         stage("deploy to tomcat"){
              agent {
 		         label "master"
 		     }
              steps{
                sshagent(['devops-tomcat-deploy-sshkey']) {
                sh '''
-                scp -o StrictHostKeyChecking=no spring-petclinic.war devops@ec2-100-26-50-45.compute-1.amazonaws.com:/u01/devops-tools/apache-tomcat-8.5.64/webapps
+                scp -o StrictHostKeyChecking=no ${pom.artifactId}.${pom.packaging} devops@ec2-100-26-50-45.compute-1.amazonaws.com:/u01/devops-tools/apache-tomcat-8.5.64/webapps
                 ssh devops@ec2-100-26-50-45.compute-1.amazonaws.com /u01/devops-tools/apache-tomcat-8.5.64/bin/shutdown.sh
                 ssh devops@ec2-100-26-50-45.compute-1.amazonaws.com /u01/devops-tools/apache-tomcat-8.5.64/bin/startup.sh
                '''
@@ -136,7 +136,8 @@ pipeline {
                 sh "curl -v -u ${mycred} http://ec2-100-26-50-45.compute-1.amazonaws.com:8081/manager/text/start?path=/${pom.artifactId}"
 	           	  }
 		        }
-	         }*/
+	         }
+         }*/
         }
       
     /*post {
